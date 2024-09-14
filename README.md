@@ -9,7 +9,7 @@ You can see mikrob-compiled blog on my [github pages](https://mrkramar.github.io
 Posts are stored in `/posts` in a markdown format and can be named any way. To have a post displayed, it needs to be
 registered in the `config.json`. Each post must have defined: title, date, preview text and image. Following is an example of such configuration:
 
-```
+```json
 "posts": {
     "my_first_post": {
         "title": "My first post",
