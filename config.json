@@ -8,9 +8,7 @@
         },
         "2": {
             "title": "Lorem ipsum dolor sit amet",
-            "date": "23-1-2021",
-            "image": "../images/me.png",
-            "preview_text" : "ABC"
+            "date": "23-1-2021"
         }
     }
 }

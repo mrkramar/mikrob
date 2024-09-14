@@ -25,17 +25,21 @@ class Post:
         self.body = self.parse_body(lines)
         self.title = metadata['title']
         self.date = metadata['date']
-        self.preview_image = metadata['image']
-        self.preview_text = metadata['preview_text']
+        self.preview_image = metadata.get('image', None)
+        self.preview_text = metadata.get('preview_text', self.extract_first_paragraph())
     
-    def preview(self, template):    
+    def preview(self, template):   
+        if self.preview_image:
+            preview_image = f'<a href="posts/{self.id}.html" target="_blank"><img src="{self.preview_image}" alt="{self.title}"></a>'
+        else:
+            preview_image = ''
+
         return template \
             .replace('{{ post_title }}', self.title) \
             .replace('{{ post_date }}', self.date) \
             .replace('{{ post_preview_text }}', f'<p>{self.preview_text}</p>') \
             .replace('{{ post_link }}', 'posts/' + self.id + '.html') \
-            .replace('{{ post_preview_image }}', 
-                     f'<a href="posts/{self.id}.html" target="_blank"><img src="{self.preview_image}" alt="{self.title}"></a>')
+            .replace('{{ post_preview_image }}', preview_image) 
 
 
     def html(self, template):
@@ -70,7 +74,11 @@ class Post:
             else:
                 result.append(process_text(line))
 
-        return ''.join(result)
+        return '<p>' + ''.join(result) + '</p>'
+    
+    def extract_first_paragraph(self):
+        match = re.search(r'<p>\s*(.*?)\s*</p>', self.body, re.DOTALL)
+        return match.group(1).strip() if match else ''
 
 
 def compile_posts_and_index(config):
