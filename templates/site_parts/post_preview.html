@@ -1,8 +1,18 @@
 <div class="post">
-    <h2>{{ post_title }}</h2>
+    <h1>{{ post_title }}</h1>
+    <div class="date">
+        <center><p><pre><code>{{ post_date }}</code></pre></p></center>
+    </div>
     <p>
         {{ post_preview_text }}
     </p>
-    <a href="{{ post_link }}">read more</a>
-    <hr>
+    <p>
+        {{ post_preview_image }}
+    </p>
+    <div class="read_more">
+        <p>
+            <center><a href="{{ post_link }}">read more</a></center>
+        </p>
+    </div>
+    
 </div>

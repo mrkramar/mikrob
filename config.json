@@ -1,0 +1,16 @@
+{
+    "posts": {
+        "1": {
+            "title": "Lorem ipsum dolor sit amet",
+            "date": "23-1-2021",
+            "image": "../images/ipsum.webp",
+            "preview_text": "Etiam tincidunt elit libero, in posuere urna condimentum quis. Donec at justo consectetur, commodo diam volutpat, vehicula tellus. Fusce cursus porttitor rhoncus. Donec eleifend ut ligula et vulputate. Proin consectetur leo diam, id tempus enim vulputate nec. "
+        },
+        "2": {
+            "title": "Lorem ipsum dolor sit amet",
+            "date": "23-1-2021",
+            "image": "../images/me.png",
+            "preview_text" : "ABC"
+        }
+    }
+}

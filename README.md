@@ -1,25 +1,34 @@
 # mikrob
 
-**mikrob** is a simple python application for compiling custom format blog entries into static html, that can be hosted on github pages. It comes with its own html templates with minimalistic design.
+**mikrob** (mikro blog) is a python application for compiling markdown-like format blog entries into static html, that can be hosted on github pages. It comes with its own html/css templates with minimalistic design.
 
 ## Demo
 You can see mikrob-compiled blog on my [github pages](https://mrkramar.github.io/).
 
-## Writing posts
-Posts are stored in `/posts`. They currently use very simple format, which consist only of date, title and paragraphs. In future, I will try to emulate simplified markdown format, so the posts can have their own subtitles, citations, etc.
+## Creating a post
+Posts are stored in `/posts` in a markdown format and can be named any way. To have a post displayed, it needs to be
+registered in the `config.json`. Each post must have defined: title, date, preview text and image. Following is an example of such configuration:
 
 ```
-<post date>
-<post title>
-
-<text paragraph1>
-<text paragraph1>
-<text paragraph1>
-
-<text paragraph2>
-<text paragraph2>
-...
+"posts": {
+    "my_first_post": {
+        "title": "My first post",
+        "date": "23-1-2021",
+        "image": "../images/ipsum.webp",
+        "preview_text": "This is my first post, welcome to my blog."
+    },
 ```
+
+The key must be the same as the markdown file name. Posts in the index will be ordered the same way as in the config.
+
+## Simplified markdown format
+
+The posts use simplified markdown format. The following features are supported:
+- headers: `# - h1, ## - h2, ## - h3`
+- bold font: `**text**`
+- hyperlinks: `[label](link)`
+- images: `![label](path)`
+
 
 ## Static pages
 Static pages can be created in `/templates`. There are some predefined tags that can be used:
@@ -43,8 +52,12 @@ Static pages can be created in `/templates`. There are some predefined tags that
 </body>
 </html>
 ```
-with the use of tags described above.
 
 ## Compilation
-Compilation is simple as running `python compile.py`.
-Your static site will be in `/compiled` folder.
+To compile the blog run `python compile.py`. It was tested with python 3.12, but should work with other versions too.
+The script doesn't require any additional dependecies.
+Your static site will be in the `/compiled` folder.
+
+## Future ideas
+- add lists
+- add quote blocks
