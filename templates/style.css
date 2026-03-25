@@ -166,7 +166,7 @@ iframe {
 }
 
 @media only screen and (min-width: 1500px) {
-  body { padding: 0 34%; }
+  body { padding: 0 32%; }
 }
 
 @media only screen and (min-width: 2000px) {
