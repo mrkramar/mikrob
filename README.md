@@ -1,66 +1,69 @@
 # mikrob
 
-**mikrob** (mikro blog) is a python application for compiling markdown-like format blog entries into static html, that can be hosted on github pages. It comes with its own html/css templates with minimalistic design.
+**mikrob** is a minimal Python static site generator for markdown-based blogs. Convert markdown posts to HTML with custom templates and host on GitHub Pages.
 
 ## Demo
-You can see mikrob-compiled blog on my [github pages](https://mrkramar.github.io/).
+See a live example at [mrkramar.github.io](https://mrkramar.github.io/).
 
 ## Creating a post
-Posts are stored in /posts in markdown format and can be named freely. 
-To display a post, it must be registered in config.json with a defined title and date. 
-A preview image and text are optional; if omitted, the first paragraph of the post is used as the preview text.
-
- Following is an example configuration:
+Posts are stored in the `/posts` directory as markdown files. Register each post in `config.json` with a title and date:
 
 ```json
 "posts": {
     "my_first_post": {
         "title": "My first post",
         "date": "23-1-2021",
-        "image": "../images/ipsum.webp",
-        "preview_text": "This is my first post, welcome to my blog."
-    },
+        "image": "images/cover.webp",
+        "preview_text": "Custom preview text"
+    }
+}
 ```
 
-The key must be the same as the markdown file name. Posts in the index will be ordered the same way as in the config.
+The post filename must match the config key. Posts appear on the index in the order they're defined.
 
-## Simplified markdown format
+**Optional fields:**
+- `preview_text`: Omit to use the first paragraph automatically
+- `image`: Post cover image for the preview
 
-The posts use simplified markdown format. The following features are supported:
-- headers: `# - h1, ## - h2, ## - h3`
-- bold font: `**text**`
-- hyperlinks: `[label](link)`
-- images: `![label](path)`
+## Markdown format
 
+Posts support a simplified markdown syntax:
+- Headers: `# h1`, `## h2`, `### h3`
+- Bold: `**text**`
+- Links: `[label](url)`
+- Images: `![alt](path)`
 
 ## Static pages
-Static pages can be created in `/templates`. There are some predefined tags that can be used:
- - `{{ head }}` - is replaced with header defined in `/templates/site_parts/head.html`
- - `{{ navbar }}` - is replaced with navigation bar defined in `/templates/site_parts/navbar.html`
 
-### Index
-`index.html` template can be as simple as:
+Custom pages (about, contact, etc.) are created in `/templates`. Available template variables:
+- `{{ head }}` → Contents of `/templates/site_parts/head.html`
+- `{{ navbar }}` → Contents of `/templates/site_parts/navbar.html`
+- `{{ img }}` → Replaced with `images/`
+
+Example `index.html`:
 ```html
 <!DOCTYPE html>
-<html lang="en">
-
-{{ head }}
-
-<body>
-
-  {{ navbar }}
-
-  {{ post_previews }}
-
-</body>
+<html>
+  {{ head }}
+  <body>
+    {{ navbar }}
+    {{ post_previews }}
+  </body>
 </html>
 ```
 
-## Compilation
-To compile the blog run `python compile.py`. It was tested with python 3.12, but should work with other versions too.
-The script doesn't require any additional dependecies.
-Your static site will be in the `/compiled` folder.
+## Usage
 
-## Future ideas
-- add lists
-- add quote blocks
+```bash
+python compile.py
+```
+
+Requires Python 3.8+ (tested with 3.12). 
+No external dependencies are required.
+Pillow library is an optional dependency - if it is present in your environment, you can use the feature for downscaling images to set resolution.
+
+Output is generated in the `/compiled` directory.
+
+## Planned features
+- Lists
+- Blockquotes
